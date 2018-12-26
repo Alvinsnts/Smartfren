@@ -1,0 +1,7 @@
+{
+  "name": "Ionic 2 Google Maps Marker Clusterer",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

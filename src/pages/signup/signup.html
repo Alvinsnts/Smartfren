@@ -1,0 +1,40 @@
+<!--
+  Generated template for the SignupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>signup</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+          <ion-label fixed>Username</ion-label>
+          <ion-input type="text"[(ngModel)]="infosignup.username"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label fixed>Email</ion-label>
+            <ion-input type="text" [(ngModel)]="infosignup.email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+              <ion-label fixed>Role</ion-label>
+              <ion-input type="text" [(ngModel)]="infosignup.role"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label fixed>Password</ion-label>
+          <ion-input type="password"  [(ngModel)]="infosignup.password"></ion-input>
+        </ion-item>
+      
+        <button ion-button black color="primary" (click)="signup()">SignUp</button>
+    </ion-list>
+</ion-content>
