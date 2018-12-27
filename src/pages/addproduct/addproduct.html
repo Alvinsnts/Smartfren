@@ -17,22 +17,22 @@
     <ion-list>
         <ion-item>
           <ion-label fixed>Product Name</ion-label>
-          <ion-input type="text" [(ngModel)]="product.productName"></ion-input>
+          <ion-input type="text" [(ngModel)]="productinfo.productName"></ion-input>
         </ion-item>
         
         <ion-item>
             <ion-label fixed>Product Price</ion-label>
-            <ion-input type="text" [(ngModel)]="product.productPrice"></ion-input>
+            <ion-input type="text" [(ngModel)]="productinfo.productPrice"></ion-input>
         </ion-item>
 
         <ion-item>
               <ion-label fixed>Product Type</ion-label>
-              <ion-input type="text" [(ngModel)]="product.productType"></ion-input>
+              <ion-input type="text" [(ngModel)]="productinfo.productType"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label fixed>Product Detail</ion-label>
-          <ion-input type="text"  [(ngModel)]="product.productDetail"></ion-input>
+          <ion-input type="text"  [(ngModel)]="productinfo.productDetail"></ion-input>
         </ion-item>
       
         <button ion-button black color="primary" (click)="addProduct()">Add Product</button>

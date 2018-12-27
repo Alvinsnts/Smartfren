@@ -1,62 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Product } from './product.model';
-import { ProductServiceProvider } from '../../providers/product-service/product-service';
-
-/**
- * Generated class for the AddproductPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { HomePage } from '../home/home';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
 @IonicPage()
 @Component({
   selector: 'page-addproduct',
   templateUrl: 'addproduct.html',
 })
-export class AddproductPage {
+export class AddproductPage implements OnInit {
 
-  images = {"imagePath" : "http://smartfrenmapping.xyz/api/uploads/", "convertedImagePath" : "http://smartfrenmapping.xyz/api/uploads/"};
   responses: any;
   productStatus: any;
-  productinfo= {"productname": "", "productprice": "", "producttype": "", "productdetail": ""}
-  product: Product;
+  productinfo= {"productName": "", "productPrice": "", "productType": "", "productDetail": ""}
 
-  constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private productService: ProductServiceProvider
-  ) {
-    this.product = new Product();
+  constructor(private navCtrl: NavController, private navParams: NavParams, private authservice: AuthServiceProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddproductPage');
+  ngOnInit() {
   }
 
-  addProduct() {
-    const data = {
-      id: '001',
-      productName: this.product.productName, 
-      productPrice: this.product.productPrice,
-      productType: this.product.productType,
-      productDetail: this.product.productDetail
-    }
+  addProduct(){
 
-    this.productService.saveProduct(data).subscribe(
-      response => {
-        console.log(response);
-      }
-    )
-  }
+    console.log(this.productinfo);
+    this.authservice.postdata('addproduct.php', this.productinfo).subscribe(res =>{
   
-  getProduct() {
-    this.productService.getProduct().subscribe(
-      response => {
-        console.log(response);
-      }
-    ) 
+      this.responses = res;
+      console.log(this.responses.status);
+      this.productStatus = this.responses.message;
+      console.log(this.productStatus);
+      console.log(this.responses);
+        this.responses = JSON.stringify(this.responses);
+        localStorage.setItem("productdata", this.responses);
+        this.navCtrl.push(HomePage);
+    }, (err: HttpErrorResponse) => 
+    {
+      console.log(err.error);
+      this.responses = err.error;
+      alert(this.responses.message);
+    });
   }
 
 }
