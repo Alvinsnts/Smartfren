@@ -22,17 +22,17 @@ declare var MarkerClusterer: any;
 export class HomePage {
   @ViewChild('map') mapElement: ElementRef;
   @ViewChild('searchbar', { read: ElementRef }) searchbar: ElementRef;
+  @ViewChild('mapContainer') mapContainer: ElementRef;
+
   addressElement: HTMLInputElement = null;
-
+  infoWindows: any;
   listSearch: string = '';
-
   map: any;
   marker: any;
   loading: any;
   search: boolean = false;
   error: any;
   switch: string = "map";
-
   regionals: any = [];
   currentregional: any;
 
@@ -49,6 +49,7 @@ export class HomePage {
     public geolocation: Geolocation,
     public http: Http
   ) {
+    this.infoWindows = [];
     this.platform.ready().then(() => this.loadMaps());
     this.regionals = [{
       "title": "Marker 1",
@@ -428,10 +429,36 @@ export class HomePage {
   addMarkersToMap(markers) {
     for(let marker of markers) {
       var position = new google.maps.LatLng(marker.latitude, marker.longitude);
-      var dogwalkMarker = new google.maps.Marker({position: position, title: marker.title});
+      var dogwalkMarker = new google.maps.Marker({
+        position: position,
+        title: marker.name,
+        contact: marker.phone,
+        opentime: marker.time,
+        locationaddress: marker.address,
+        detail: marker.description,
+        icon: 'assets/imgs/marker.png'});
       dogwalkMarker.setMap(this.map);
+      this.addInfoWindowToMarker(dogwalkMarker);
     }
   }
+  addInfoWindowToMarker(marker) {
+    var infoWindowContent = 
+    '<div id="content"><h1 id="firstHeading" class="firstHeading">' + marker.title + '</h1><label id="secondHeading" class="secondHeading">' + "Phone Number : " + marker.contact + '</label><br /><label id="secondHeading" class="secondHeading">' + "Open Time : " + marker.opentime + '</label><br /><label id="secondHeading" class="secondHeading">' + "Address : " + marker.locationaddress + '</label><br /></div>';
+    var infoWindow = new google.maps.InfoWindow({
+      content: infoWindowContent
+    });
+    marker.addListener('click', () => {
+      this.closeAllInfoWindows();
+      infoWindow.open(this.map, marker);
+    });
+    this.infoWindows.push(infoWindow);
+  }
+  closeAllInfoWindows() {
+    for(let window of this.infoWindows) {
+      window.close();
+    }
+  }
+
 
 
   logout(){
