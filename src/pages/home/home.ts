@@ -8,6 +8,8 @@ import { Storage } from '@ionic/storage';
 import { Login } from '../login/login';
 import { SignupPage } from '../signup/signup';
 import { AddproductPage } from '../addproduct/addproduct';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 
 declare var google: any;
@@ -44,7 +46,8 @@ export class HomePage {
     public alertCtrl: AlertController,
     public storage: Storage,
     public actionSheetCtrl: ActionSheetController,
-    public geolocation: Geolocation
+    public geolocation: Geolocation,
+    public http: Http
   ) {
     this.platform.ready().then(() => this.loadMaps());
     this.regionals = [{
@@ -124,7 +127,7 @@ export class HomePage {
         zoom: 10
       };
       this.map.setOptions(options);
-      this.addMarker(location, "Mein gesuchter Standort");
+      this.addMarker(location, "Hai, it's you");
 
     });
   }
@@ -154,7 +157,7 @@ export class HomePage {
       var mapEle = this.mapElement.nativeElement;
       this.map = new google.maps.Map(mapEle, {
         zoom: 10,
-        center: { lat: 51.165691, lng: 10.451526 },
+        center: { lat: -6.21462, lng: 106.84513 },
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         styles: [{ "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#e9e9e9" }, { "lightness": 17 }] }, { "featureType": "landscape", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 20 }] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }, { "lightness": 17 }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "color": "#ffffff" }, { "lightness": 29 }, { "weight": 0.2 }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 18 }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 16 }] }, { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 21 }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#dedede" }, { "lightness": 21 }] }, { "elementType": "labels.text.stroke", "stylers": [{ "visibility": "on" }, { "color": "#ffffff" }, { "lightness": 16 }] }, { "elementType": "labels.text.fill", "stylers": [{ "saturation": 36 }, { "color": "#333333" }, { "lightness": 40 }] }, { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "geometry", "stylers": [{ "color": "#f2f2f2" }, { "lightness": 19 }] }, { "featureType": "administrative", "elementType": "geometry.fill", "stylers": [{ "color": "#fefefe" }, { "lightness": 20 }] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{ "color": "#fefefe" }, { "lightness": 17 }, { "weight": 1.2 }] }],
         disableDoubleClickZoom: false,
@@ -228,9 +231,6 @@ export class HomePage {
           }
         ]
       });
-
-
-
 
       google.maps.event.addListenerOnce(this.map, 'idle', () => {
         google.maps.event.trigger(this.map, 'resize');
@@ -351,7 +351,7 @@ export class HomePage {
             zoom: 14
           };
           this.map.setOptions(options);
-          this.addMarker(myPos, "Mein Standort!");
+          this.addMarker(myPos, "Hai, it's you");
 
           let alert = this.alertCtrl.create({
             title: 'Location',
@@ -414,6 +414,25 @@ export class HomePage {
       infoWindow.open(this.map, marker);
     });
   }
+
+  ionViewWillEnter() {
+    this.getMarkers();
+  }
+  getMarkers() {
+    this.http.get('assets/data/markers.json')
+    .map((res) => res.json())
+    .subscribe(data => {
+      this.addMarkersToMap(data);
+    });
+  }
+  addMarkersToMap(markers) {
+    for(let marker of markers) {
+      var position = new google.maps.LatLng(marker.latitude, marker.longitude);
+      var dogwalkMarker = new google.maps.Marker({position: position, title: marker.title});
+      dogwalkMarker.setMap(this.map);
+    }
+  }
+
 
   logout(){
     // Remove API token 
