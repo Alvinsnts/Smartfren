@@ -22,5 +22,8 @@ export class AuthServiceProvider {
   uploadImage(url,credentials){
     return this.http.post(`${apiUrl}/${url}`, credentials, {});
   }
+  getData(url){
+    return this.http.get(`${apiUrl}/${url}`);
+  }
 
 }

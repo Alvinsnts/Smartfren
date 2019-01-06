@@ -1,15 +1,18 @@
 import { identifierModuleUrl } from '@angular/compiler/compiler';
-import { Component, NgZone, ViewChild, ElementRef } from '@angular/core';
+import { Component, NgZone, ViewChild, ElementRef, ɵConsole } from '@angular/core';
 import { ActionSheetController, AlertController, App, LoadingController, NavController, Platform, ToastController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
 import { Login } from '../login/login';
 import { SignupPage } from '../signup/signup';
 import { AddproductPage } from '../addproduct/addproduct';
+import { AddnewlocationPage } from '../addnewlocation/addnewlocation';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 declare var google: any;
@@ -35,8 +38,12 @@ export class HomePage {
   switch: string = "map";
   regionals: any = [];
   currentregional: any;
+  responseData: any;
+  location: any;
+  locationList: any;
 
   constructor(
+    private authservice: AuthServiceProvider,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public app: App,
@@ -66,9 +73,77 @@ export class HomePage {
     }];
   }
 
+  ngOnInit() {
+    this.authservice.getData('locationlist.php').subscribe(data => {
+      this.responseData = data;
+      this.location = this.responseData;
+      this.locationList = this.location.records;
+      console.log(this.locationList);
+    }, (err : HttpErrorResponse) => {
+      console.log(err.error);
+      this.responseData = err.error;
+      alert(this.responseData.message);
+    });
+  }
+
   viewPlace(id) {
     console.log('Clicked Marker', id);
   }
+
+  
+  ionViewWillEnter() {
+    this.getMarkers();
+  }
+  getMarkers() {
+    // this.http.get('assets/data/markers.json')
+    // // this.authservice.getData('locationlist.php')
+    // .map((res) => res.json())
+    // .subscribe(data => {
+    //   this.addMarkersToMap(data);
+    // //  this.responseData = data;
+    // //  this.location = this.responseData;
+    // //  this.locationList = this.location.records;
+    // //  console.log(this.locationList);
+    // });
+    var data = this.locationList ;
+    //var data_json = JSON.parse(data);
+    this.addMarkersToMap(data);
+
+  }
+  addMarkersToMap(markers) {
+    for(let marker of markers) {
+      var position = new google.maps.LatLng(marker.latitude, marker.longitude);
+      var dogwalkMarker = new google.maps.Marker({
+        position: position,
+        title: marker.name,
+        locationid: marker.locationID,
+        contact: marker.phone,
+        opentime: marker.time,
+        locationaddress: marker.address,
+        detail: marker.description,
+        icon: 'assets/imgs/marker.png'});
+      dogwalkMarker.setMap(this.map);
+      this.addInfoWindowToMarker(dogwalkMarker);
+    }
+  }
+  addInfoWindowToMarker(marker) {
+    var infoWindowContent = 
+    '<div id="content"><h1 id="firstHeading" class="firstHeading">' + marker.title + '</h1><label id="secondHeading" class="secondHeading">' + "ID : " + marker.locationid + '</label><br /> <label id="secondHeading" class="secondHeading">' + "Phone Number : " + marker.contact + '</label><br /><label id="secondHeading" class="secondHeading">' + "Open Time : " + marker.opentime + '</label><br /><label id="secondHeading" class="secondHeading">' + "Address : " + marker.locationaddress + '</label><br /></div>';
+    var infoWindow = new google.maps.InfoWindow({
+      content: infoWindowContent
+    });
+    marker.addListener('click', () => {
+      this.closeAllInfoWindows();
+      infoWindow.open(this.map, marker);
+    });
+    this.infoWindows.push(infoWindow);
+  }
+  closeAllInfoWindows() {
+    for(let window of this.infoWindows) {
+      window.close();
+    }
+  }
+
 
 
   loadMaps() {
@@ -416,51 +491,6 @@ export class HomePage {
     });
   }
 
-  ionViewWillEnter() {
-    this.getMarkers();
-  }
-  getMarkers() {
-    this.http.get('assets/data/markers.json')
-    .map((res) => res.json())
-    .subscribe(data => {
-      this.addMarkersToMap(data);
-    });
-  }
-  addMarkersToMap(markers) {
-    for(let marker of markers) {
-      var position = new google.maps.LatLng(marker.latitude, marker.longitude);
-      var dogwalkMarker = new google.maps.Marker({
-        position: position,
-        title: marker.name,
-        contact: marker.phone,
-        opentime: marker.time,
-        locationaddress: marker.address,
-        detail: marker.description,
-        icon: 'assets/imgs/marker.png'});
-      dogwalkMarker.setMap(this.map);
-      this.addInfoWindowToMarker(dogwalkMarker);
-    }
-  }
-  addInfoWindowToMarker(marker) {
-    var infoWindowContent = 
-    '<div id="content"><h1 id="firstHeading" class="firstHeading">' + marker.title + '</h1><label id="secondHeading" class="secondHeading">' + "Phone Number : " + marker.contact + '</label><br /><label id="secondHeading" class="secondHeading">' + "Open Time : " + marker.opentime + '</label><br /><label id="secondHeading" class="secondHeading">' + "Address : " + marker.locationaddress + '</label><br /></div>';
-    var infoWindow = new google.maps.InfoWindow({
-      content: infoWindowContent
-    });
-    marker.addListener('click', () => {
-      this.closeAllInfoWindows();
-      infoWindow.open(this.map, marker);
-    });
-    this.infoWindows.push(infoWindow);
-  }
-  closeAllInfoWindows() {
-    for(let window of this.infoWindows) {
-      window.close();
-    }
-  }
-
-
-
   logout(){
     // Remove API token 
     const root = this.app.getRootNav();
@@ -477,6 +507,10 @@ export class HomePage {
 
   addproduct(){
     this.nav.push(AddproductPage);
+    }
+
+  addlocation(){
+    this.nav.push(AddnewlocationPage);
     }
 
 }

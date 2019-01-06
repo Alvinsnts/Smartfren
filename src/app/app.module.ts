@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ProductServiceProvider } from '../providers/product-service/product-service';
+import { AddnewlocationPage } from '../pages/addnewlocation/addnewlocation';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ProductServiceProvider } from '../providers/product-service/product-ser
     Login,
     SignupPage,
     AddproductPage,
+    AddnewlocationPage,
     HomePage
   ],
   imports: [
@@ -34,6 +36,7 @@ import { ProductServiceProvider } from '../providers/product-service/product-ser
     Login,
     SignupPage,
     AddproductPage,
+    AddnewlocationPage,
     HomePage
   ],
   providers: [
