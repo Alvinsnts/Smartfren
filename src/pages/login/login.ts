@@ -3,7 +3,7 @@ import { HomePage } from '../home/home';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-
+import { SignupPage } from '../signup/signup'
 
 @Component({
   selector: 'page-login',
@@ -39,4 +39,7 @@ export class Login implements OnInit {
     });
   }
 
+  signup(){
+    this.navCtrl.push(SignupPage);
+    }
 }

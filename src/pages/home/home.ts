@@ -13,7 +13,8 @@ import { AddnewlocationPage } from '../addnewlocation/addnewlocation';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import { GraphPage } from '../graph/graph';
+import { UpdatestockPage } from '../updatestock/updatestock';
 
 declare var google: any;
 declare var MarkerClusterer: any;
@@ -26,6 +27,9 @@ export class HomePage {
   @ViewChild('map') mapElement: ElementRef;
   @ViewChild('searchbar', { read: ElementRef }) searchbar: ElementRef;
   @ViewChild('mapContainer') mapContainer: ElementRef;
+  @ViewChild('pieChart') pieChart;
+  @ViewChild('barChart') barChart;
+  @ViewChild('lineChart') lineChart;
 
   addressElement: HTMLInputElement = null;
   infoWindows: any;
@@ -72,7 +76,7 @@ export class HomePage {
       "longitude": 9.8426116
     }];
   }
-
+  
   ngOnInit() {
     this.authservice.getData('locationlist.php').subscribe(data => {
       this.responseData = data;
@@ -89,7 +93,6 @@ export class HomePage {
   viewPlace(id) {
     console.log('Clicked Marker', id);
   }
-
   
   ionViewWillEnter() {
     this.getMarkers();
@@ -128,7 +131,7 @@ export class HomePage {
   }
   addInfoWindowToMarker(marker) {
     var infoWindowContent = 
-    '<div id="content"><h1 id="firstHeading" class="firstHeading">' + marker.title + '</h1><label id="secondHeading" class="secondHeading">' + "ID : " + marker.locationid + '</label><br /> <label id="secondHeading" class="secondHeading">' + "Phone Number : " + marker.contact + '</label><br /><label id="secondHeading" class="secondHeading">' + "Open Time : " + marker.opentime + '</label><br /><label id="secondHeading" class="secondHeading">' + "Address : " + marker.locationaddress + '</label><br /></div>';
+    '<div id="content"><h1 id="firstHeading" class="firstHeading">' + marker.title + '</h1><label id="secondHeading" class="secondHeading">' + "ID : " + marker.locationid + '</label><br /> <label id="secondHeading" class="secondHeading">' + "Phone Number : " + marker.contact + '</label><br /><label id="secondHeading" class="secondHeading">' + "Open Time : " + marker.opentime + '</label><br /><label id="secondHeading" class="secondHeading">' + "Address : " + marker.locationaddress + '</label><br /><button type="buttton" onclick="document.getElementById(\'addProduct\').click();">Add Product</button></div>';
     var infoWindow = new google.maps.InfoWindow({
       content: infoWindowContent
     });
@@ -143,8 +146,6 @@ export class HomePage {
       window.close();
     }
   }
-
-
 
   loadMaps() {
     if (!!google) {
@@ -500,7 +501,7 @@ export class HomePage {
   login(){
     this.nav.push(Login);
     }
-  
+
   signup(){
     this.nav.push(SignupPage);
     }
@@ -512,5 +513,12 @@ export class HomePage {
   addlocation(){
     this.nav.push(AddnewlocationPage);
     }
+    
+  graph(){
+    this.nav.push(GraphPage);
+    }
 
+  updatestock(){
+    this.nav.push(UpdatestockPage);
+    }
 }

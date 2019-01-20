@@ -4,10 +4,10 @@
       Smartfren Mapping
     </ion-title>
     <ion-buttons end>
-      <button ion-button color="primary" (click)="signup()">Sign up</button>
-      <button ion-button color="primary" (click)="login()">Log in</button>
-      <button ion-button color="primary" (click)="addproduct()">Add Product</button>
+      <button ion-button color="primary" id="addProduct" (click)="addproduct()">Add Product</button>
       <button ion-button color="primary" (click)="addlocation()">Add Location</button>
+      <button ion-button color="primary" (click)="updatestock()">Update Stock</button>
+      <button ion-button color="primary" (click)="graph()">Graph</button>
       <button ion-button color="primary" (click)="logout()">Logout</button>
       <button ion-button icon-only (click)='toggleSearch()'>
         <ion-icon name="search"></ion-icon>
@@ -21,7 +21,7 @@
 
 <div class="switch">
   <button ion-button color="light" (click)="(switch = 'map'); resizeMap()" [class.active]="(switch == 'map')" icon-only><ion-icon name="map"></ion-icon></button>
-  <button ion-button color="light" (click)="(switch = 'list'); " [class.active]="(switch == 'list')" icon-only><ion-icon name="list"></ion-icon></button>
+  <button ion-button color="light" (click)="(switch = 'list');" [class.active]="(switch == 'list')" icon-only><ion-icon name="list"></ion-icon></button>
 </div>
 
 <div class="currentitem" *ngIf="currentregional">
@@ -50,4 +50,5 @@
     <ion-searchbar #searchbar placeholder="Suchen" [hidden]="!search"></ion-searchbar>
     <div id="map" #map></div>
   </div>
+
 </ion-content>

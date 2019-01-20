@@ -15,6 +15,10 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ProductServiceProvider } from '../providers/product-service/product-service';
 import { AddnewlocationPage } from '../pages/addnewlocation/addnewlocation';
+import { ChartsModule } from 'ng2-charts';
+import { GraphPage } from '../pages/graph/graph';
+import { UpdatestockPage } from '../pages/updatestock/updatestock';
+import { SelectSearchableModule } from 'ionic-select-searchable';
 
 @NgModule({
   declarations: [
@@ -23,11 +27,15 @@ import { AddnewlocationPage } from '../pages/addnewlocation/addnewlocation';
     SignupPage,
     AddproductPage,
     AddnewlocationPage,
-    HomePage
+    HomePage,
+    GraphPage,
+    UpdatestockPage
   ],
   imports: [
     BrowserModule, HttpModule, HttpClientModule,
     IonicModule.forRoot(MyApp),
+    ChartsModule,
+    SelectSearchableModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -37,7 +45,9 @@ import { AddnewlocationPage } from '../pages/addnewlocation/addnewlocation';
     SignupPage,
     AddproductPage,
     AddnewlocationPage,
-    HomePage
+    HomePage,
+    GraphPage,
+    UpdatestockPage
   ],
   providers: [
     StatusBar,

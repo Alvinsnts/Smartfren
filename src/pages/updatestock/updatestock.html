@@ -1,0 +1,32 @@
+<!--
+  Generated template for the UpdatestockPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Update Stock</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+
+  <ion-item>
+    <ion-label>Outlet Name</ion-label>
+    <ion-select [(ngModel)]="productinfo.productID" value="" ok-text="Okay" cancel-text="Dismiss">
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Product Name</ion-label>
+    <ion-select [(ngModel)]="productinfo.productName" value="" ok-text="Okay" cancel-text="Dismiss">
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed>Quantity</ion-label>
+    <ion-input type="text" [(ngModel)]="productinfo.productQuantity"></ion-input>
+  </ion-item>
+
+  <button ion-button shape="round" size="full" color="primary" (click)="updateStock()">Update Stock</button>
+</ion-content>
