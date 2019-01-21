@@ -15,12 +15,14 @@
 
   <ion-item>
     <ion-label>Outlet Name</ion-label>
-    <ion-select [(ngModel)]="productinfo.productID" value="" ok-text="Okay" cancel-text="Dismiss">
+    <ion-select [(ngModel)]="locationinfo.locationName" value="gantneg" ok-text="Okay" cancel-text="Dismiss">
+    <ion-option *ngFor="let locations of locationList" value="{{locations.name}}">{{locations.name}}</ion-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-label>Product Name</ion-label>
-    <ion-select [(ngModel)]="productinfo.productName" value="" ok-text="Okay" cancel-text="Dismiss">
+    <ion-select [(ngModel)]="productinfo.productname" value="" ok-text="Okay" cancel-text="Dismiss">
+    <ion-option *ngFor="let products of productList" value="{{products.productname}}">{{products.productname}}</ion-option>
     </ion-select>
   </ion-item>
   <ion-item>

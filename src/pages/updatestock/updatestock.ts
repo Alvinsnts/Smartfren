@@ -1,60 +1,75 @@
-
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HomePage } from '../home/home';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { SelectSearchableComponent } from 'ionic-select-searchable';
 
 @Component({
   selector: 'page-updatestock',
   templateUrl: 'updatestock.html',
 })
-export class UpdatestockPage {
+export class UpdatestockPage implements OnInit{
 
+  @ViewChild('myselect') selectComponent: SelectSearchableComponent;
   responseData: any;
-  productDetailInfo: any;
+  responses: any;
   product: any;
   productList: any;
-  // tslint:disable-next-line:quotemark
-  input = { "stock": "", "productDetailId" : "" };
-  productinfo= {"productID" : "", "productName": "", "productPrice": "", "productType": "", "productDetail": "", "productQuantity": ""}
+  productStatus: any;
+  location: any;
+  locationList: any;
+  locationStatus: any;
+  locationinfo = {"locationName": ""};
+  productinfo = {"productname": ""};
   constructor(private navCtrl: NavController, private navParams: NavParams, private authservice: AuthServiceProvider) {}
 
   ngOnInit() {
-
-  }
-
-  getProductInfo(productId) {
-    const path = 'getproductinfo.php?id=' + productId;
-    console.log(path);
-    this.authservice.getData(path).subscribe(data => {
+    this.authservice.getData('locationlist.php').subscribe(data => {
 
       this.responseData = data;
-      console.log(this.responseData);
-      this.productDetailInfo = this.responseData.records;
-      console.log(this.productDetailInfo);
-      console.log(this.productDetailInfo[0].size);
+      this.location = this.responseData;
+      this.locationList = this.location.records;
+      console.log(this.locationList);
 
     }, (err: HttpErrorResponse) => {
       console.log(err.error);
       this.responseData = err.error;
       alert(this.responseData.message);
     });
-
-  }
-
-  updateStock() {
-    this.input.productDetailId = this.productDetailInfo[0].productDetailId;
-    this.authservice.postdata('updatestock.php', this.input).subscribe(data => {
+    this.authservice.getData('productlist.php').subscribe(data => {
 
       this.responseData = data;
-      alert(this.responseData.message);
-      this.navCtrl.push(HomePage);
+      this.product = this.responseData;
+      this.productList = this.product.records;
+      console.log(this.productList);
+
     }, (err: HttpErrorResponse) => {
       console.log(err.error);
       this.responseData = err.error;
       alert(this.responseData.message);
     });
   }
+  updateStock(){
+
+    console.log(this.productinfo);
+    this.authservice.postdata('addproduct.php', this.productinfo).subscribe(res =>{
+  
+      this.responses = res;
+      console.log(this.responses.status);
+      this.productStatus = this.responses.message;
+      console.log(this.productStatus);
+      console.log(this.responses);
+        this.responses = JSON.stringify(this.responses);
+        localStorage.setItem("productdata", this.responses);
+        this.navCtrl.push(HomePage);
+    }, (err: HttpErrorResponse) => 
+    {
+      console.log(err.error);
+      this.responses = err.error;
+      alert(this.responses.message);
+    });
+  }
+
 
 }
