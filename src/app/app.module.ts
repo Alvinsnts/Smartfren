@@ -19,6 +19,7 @@ import { ChartsModule } from 'ng2-charts';
 import { GraphPage } from '../pages/graph/graph';
 import { UpdatestockPage } from '../pages/updatestock/updatestock';
 import { SelectSearchableModule } from 'ionic-select-searchable';
+import { FinancePage } from '../pages/finance/finance';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     AddnewlocationPage,
     HomePage,
     GraphPage,
-    UpdatestockPage
+    UpdatestockPage,
+    FinancePage
   ],
   imports: [
     BrowserModule, HttpModule, HttpClientModule,
@@ -47,7 +49,8 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     AddnewlocationPage,
     HomePage,
     GraphPage,
-    UpdatestockPage
+    UpdatestockPage,
+    FinancePage
   ],
   providers: [
     StatusBar,

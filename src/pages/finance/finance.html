@@ -1,0 +1,58 @@
+<!--
+  Generated template for the FinancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+      [canSearch]="true"
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Finance</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label>Outlet Name</ion-label>
+    <ion-select [(ngModel)]="financeinfo.locationName" value="" ok-text="Okay" cancel-text="Dismiss">
+    <ion-option *ngFor="let locations of locationList" value="{{locations.name}}">{{locations.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+  <ion-label>Months</ion-label>
+  <ion-select [(ngModel)]="financeinfo.months" value="" ok-text="Okay" cancel-text="Dismiss">
+    <ion-option value="January">January</ion-option>
+    <ion-option value="February">February</ion-option>
+    <ion-option value="March">March</ion-option>
+    <ion-option value="April">April</ion-option>
+    <ion-option value="May">May</ion-option>
+    <ion-option value="June">June</ion-option>
+    <ion-option value="July">July</ion-option>
+    <ion-option value="August">August</ion-option>
+    <ion-option value="September">September</ion-option>
+    <ion-option value="October">October</ion-option>
+    <ion-option value="November">November</ion-option>
+    <ion-option value="December">December</ion-option>
+  </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed>Years</ion-label>
+    <ion-input type="text" [(ngModel)]="financeinfo.years"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed>Income</ion-label>
+    <ion-input type="text" [(ngModel)]="financeinfo.income"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed>Expenses</ion-label>
+    <ion-input type="text" [(ngModel)]="financeinfo.expenses"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed>Sales (pcs)</ion-label>
+    <ion-input type="text" [(ngModel)]="financeinfo.sales"></ion-input>
+  </ion-item>
+
+
+  <button ion-button shape="round" size="full" color="primary" (click)="updateInfo()">Update Info</button>
+</ion-content>

@@ -15,6 +15,7 @@ import 'rxjs/add/operator/map';
 import { HttpErrorResponse } from '@angular/common/http';
 import { GraphPage } from '../graph/graph';
 import { UpdatestockPage } from '../updatestock/updatestock';
+import { FinancePage } from '../finance/finance';
 
 declare var google: any;
 declare var MarkerClusterer: any;
@@ -520,5 +521,9 @@ export class HomePage {
 
   updatestock(){
     this.nav.push(UpdatestockPage);
+    }
+
+  finance(){
+    this.nav.push(FinancePage);
     }
 }
