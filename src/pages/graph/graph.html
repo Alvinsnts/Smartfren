@@ -7,10 +7,11 @@
   </ion-header>
   
   <ion-content>
-  
+    <button ion-button shape="round" size="full" color="primary" (click)="makeGraph()">Make Graph</button>
+
       <ion-card>
         <ion-card-header>
-          Bar Chart
+          Income
         </ion-card-header>
         <ion-card-content>
           <canvas #barCanvas></canvas>
@@ -19,7 +20,7 @@
   
       <ion-card>
         <ion-card-header>
-          Doughnut Chart
+          Expenses
         </ion-card-header>
         <ion-card-content>
           <canvas #doughnutCanvas></canvas>
@@ -28,7 +29,7 @@
   
       <ion-card>
         <ion-card-header>
-          Line Chart
+          Sales
         </ion-card-header>
         <ion-card-content>
           <canvas #lineCanvas></canvas>

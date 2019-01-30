@@ -55,7 +55,7 @@ export class GraphPage implements OnInit {
       this.finance = this.responseData;
       this.financeList = this.finance.records;
       console.log(this.financeList);
-      this.makeGraph();
+      //this.makeGraph();
 
     }, (err: HttpErrorResponse) => {
       console.log(err.error);
@@ -67,9 +67,12 @@ export class GraphPage implements OnInit {
   makeGraph() {
       var labelList = [];
       var dataList = [];
+      var expenseList = [];
+      var salesList = [];
+      var monthList = [];
       var i;
       console.log(this.financeList);
-      
+
       var a = this.financeList;
       console.log(a);
       var num = a.length;
@@ -77,7 +80,10 @@ export class GraphPage implements OnInit {
       for (i = 0; i < num; i++)
       {
           labelList.push(this.financeList[i].locationName);
+          monthList.push(this.financeList[i].months);
           dataList.push(this.financeList[i].income);
+          expenseList.push(this.financeList[i].expenses);
+          salesList.push(this.financeList[i].sales);
 
       }
 
@@ -85,7 +91,7 @@ export class GraphPage implements OnInit {
 
           type: 'bar',
           data: {
-              labels: labelList,
+            labels: monthList,
               datasets: [{
                   label: 'Income',
                   data: dataList,
@@ -124,10 +130,10 @@ export class GraphPage implements OnInit {
 
           type: 'doughnut',
           data: {
-              labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            labels: monthList,
               datasets: [{
-                  label: '# of Votes',
-                  data: [12, 19, 3, 5, 2, 3],
+                  label: 'Expenses',
+                  data: expenseList,
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
                       'rgba(54, 162, 235, 0.2)',
@@ -153,10 +159,10 @@ export class GraphPage implements OnInit {
 
           type: 'line',
           data: {
-              labels: ["January", "February", "March", "April", "May", "June", "July"],
-              datasets: [
+            labels: monthList,
+            datasets: [
                   {
-                      label: "My First dataset",
+                      label: "sales",
                       fill: false,
                       lineTension: 0.1,
                       backgroundColor: "rgba(75,192,192,0.4)",
@@ -174,7 +180,7 @@ export class GraphPage implements OnInit {
                       pointHoverBorderWidth: 2,
                       pointRadius: 1,
                       pointHitRadius: 10,
-                      data: [65, 59, 80, 81, 56, 55, 40],
+                      data: salesList,
                       spanGaps: false,
                   }
               ]

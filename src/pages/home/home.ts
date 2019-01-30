@@ -3,7 +3,6 @@ import { Component, NgZone, ViewChild, ElementRef, ɵConsole } from '@angular/co
 import { ActionSheetController, AlertController, App, LoadingController, NavController, Platform, ToastController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
 import { Login } from '../login/login';
@@ -99,18 +98,7 @@ export class HomePage {
     this.getMarkers();
   }
   getMarkers() {
-    // this.http.get('assets/data/markers.json')
-    // // this.authservice.getData('locationlist.php')
-    // .map((res) => res.json())
-    // .subscribe(data => {
-    //   this.addMarkersToMap(data);
-    // //  this.responseData = data;
-    // //  this.location = this.responseData;
-    // //  this.locationList = this.location.records;
-    // //  console.log(this.locationList);
-    // });
     var data = this.locationList ;
-    //var data_json = JSON.parse(data);
     this.addMarkersToMap(data);
 
   }
