@@ -20,6 +20,7 @@ import { GraphPage } from '../pages/graph/graph';
 import { UpdatestockPage } from '../pages/updatestock/updatestock';
 import { SelectSearchableModule } from 'ionic-select-searchable';
 import { FinancePage } from '../pages/finance/finance';
+import { RequestproductPage } from '../pages/requestproduct/requestproduct';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FinancePage } from '../pages/finance/finance';
     HomePage,
     GraphPage,
     UpdatestockPage,
-    FinancePage
+    FinancePage,
+    RequestproductPage
   ],
   imports: [
     BrowserModule, HttpModule, HttpClientModule,
@@ -50,7 +52,8 @@ import { FinancePage } from '../pages/finance/finance';
     HomePage,
     GraphPage,
     UpdatestockPage,
-    FinancePage
+    FinancePage,
+    RequestproductPage
   ],
   providers: [
     StatusBar,

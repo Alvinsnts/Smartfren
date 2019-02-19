@@ -15,6 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { GraphPage } from '../graph/graph';
 import { UpdatestockPage } from '../updatestock/updatestock';
 import { FinancePage } from '../finance/finance';
+import { RequestproductPage } from '../requestproduct/requestproduct';
 
 declare var google: any;
 declare var MarkerClusterer: any;
@@ -513,5 +514,9 @@ export class HomePage {
 
   finance(){
     this.nav.push(FinancePage);
+    }
+
+  requestproduct(){
+    this.nav.push(RequestproductPage);
     }
 }
