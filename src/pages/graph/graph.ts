@@ -65,6 +65,8 @@ export class GraphPage implements OnInit {
 }
 
   makeGraph() {
+
+      var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       var labelList = [];
       var dataList = [];
       var expenseList = [];
@@ -80,7 +82,7 @@ export class GraphPage implements OnInit {
       for (i = 0; i < num; i++)
       {
           labelList.push(this.financeList[i].locationName);
-          monthList.push(this.financeList[i].months);
+          monthList.push(monthName[this.financeList[i].months - 1]);
           dataList.push(this.financeList[i].income);
           expenseList.push(this.financeList[i].expenses);
           salesList.push(this.financeList[i].sales);
@@ -101,15 +103,28 @@ export class GraphPage implements OnInit {
                       'rgba(255, 206, 86, 0.2)',
                       'rgba(75, 192, 192, 0.2)',
                       'rgba(153, 102, 255, 0.2)',
-                      'rgba(255, 159, 64, 0.2)'
+                      'rgba(255, 159, 64, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(170, 27, 151, 0.2)',
+                      'rgba(255, 233, 0, 0.2)',
+                      'rgba(255, 0, 0, 0.2)',
+                      'rgba(0, 255, 0, 0.2)',
+                      'rgba(0, 0, 255, 0.2)'
+                                                                                                                                    
                   ],
                   borderColor: [
-                      'rgba(255,99,132,1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(255, 206, 86, 1)',
-                      'rgba(75, 192, 192, 1)',
-                      'rgba(153, 102, 255, 1)',
-                      'rgba(255, 159, 64, 1)'
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(170, 27, 151, 0.2)',
+                      'rgba(255, 233, 0, 0.2)',
+                      'rgba(255, 0, 0, 0.2)',
+                      'rgba(0, 255, 0, 0.2)',
+                      'rgba(0, 0, 255, 0.2)'
                   ],
                   borderWidth: 1
               }]
@@ -128,19 +143,25 @@ export class GraphPage implements OnInit {
 
       this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
 
-          type: 'doughnut',
+          type: 'bar',
           data: {
             labels: monthList,
               datasets: [{
                   label: 'Expenses',
                   data: expenseList,
                   backgroundColor: [
-                      'rgba(255, 99, 132, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(255, 206, 86, 0.2)',
-                      'rgba(75, 192, 192, 0.2)',
-                      'rgba(153, 102, 255, 0.2)',
-                      'rgba(255, 159, 64, 0.2)'
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(170, 27, 151, 0.2)',
+                    'rgba(255, 233, 0, 0.2)',
+                    'rgba(255, 0, 0, 0.2)',
+                    'rgba(0, 255, 0, 0.2)',
+                    'rgba(0, 0, 255, 0.2)'
                   ],
                   hoverBackgroundColor: [
                       "#FF6384",
@@ -157,36 +178,38 @@ export class GraphPage implements OnInit {
 
       this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 
-          type: 'line',
-          data: {
-            labels: monthList,
-            datasets: [
-                  {
-                      label: "sales",
-                      fill: false,
-                      lineTension: 0.1,
-                      backgroundColor: "rgba(75,192,192,0.4)",
-                      borderColor: "rgba(75,192,192,1)",
-                      borderCapStyle: 'butt',
-                      borderDash: [],
-                      borderDashOffset: 0.0,
-                      borderJoinStyle: 'miter',
-                      pointBorderColor: "rgba(75,192,192,1)",
-                      pointBackgroundColor: "#fff",
-                      pointBorderWidth: 1,
-                      pointHoverRadius: 5,
-                      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                      pointHoverBorderColor: "rgba(220,220,220,1)",
-                      pointHoverBorderWidth: 2,
-                      pointRadius: 1,
-                      pointHitRadius: 10,
-                      data: salesList,
-                      spanGaps: false,
-                  }
-              ]
-          }
+        type: 'bar',
+        data: {
+          labels: monthList,
+            datasets: [{
+                label: 'Sales',
+                data: salesList,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(170, 27, 151, 0.2)',
+                    'rgba(255, 233, 0, 0.2)',
+                    'rgba(255, 0, 0, 0.2)',
+                    'rgba(0, 255, 0, 0.2)',
+                    'rgba(0, 0, 255, 0.2)'
+                ],
+                hoverBackgroundColor: [
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56",
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56"
+                ]
+            }]
+        }
 
-      });
+    });
 
   }
 

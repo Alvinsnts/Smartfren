@@ -18,7 +18,14 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 })
 export class SignupPage implements OnInit {
 
+  responseData: any;
   responses: any;
+  product: any;
+  productList: any;
+  productStatus: any;
+  location: any;
+  locationList: any;
+  locationStatus: any;
   registerStatus: any;
   infosignup= {"username": "","email": "", "password": "", "role": ""}
   
@@ -26,8 +33,31 @@ export class SignupPage implements OnInit {
   }
 
   ngOnInit() {
-  }
+    this.authservice.getData('locationlist.php').subscribe(data => {
 
+      this.responseData = data;
+      this.location = this.responseData;
+      this.locationList = this.location.records;
+      console.log(this.locationList);
+
+    }, (err: HttpErrorResponse) => {
+      console.log(err.error);
+      this.responseData = err.error;
+      alert(this.responseData.message);
+    });
+    this.authservice.getData('productlist.php').subscribe(data => {
+
+      this.responseData = data;
+      this.product = this.responseData;
+      this.productList = this.product.records;
+      console.log(this.productList);
+
+    }, (err: HttpErrorResponse) => {
+      console.log(err.error);
+      this.responseData = err.error;
+      alert(this.responseData.message);
+    });
+  }
   signup(){
 
     console.log(this.infosignup);

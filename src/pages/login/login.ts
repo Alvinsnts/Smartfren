@@ -24,7 +24,7 @@ export class Login implements OnInit {
     console.log(this.infologin);
     this.authservice.postdata('login.php', this.infologin).subscribe(res => {
       this.responses = res;
-      console.log(this.responses.status);
+
       this.loginstatus = this.responses.message;
       console.log(this.loginstatus);
       console.log(this.responses);

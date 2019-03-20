@@ -16,6 +16,7 @@ import { GraphPage } from '../graph/graph';
 import { UpdatestockPage } from '../updatestock/updatestock';
 import { FinancePage } from '../finance/finance';
 import { RequestproductPage } from '../requestproduct/requestproduct';
+import { RequestlistPage } from '../requestlist/requestlist';
 
 declare var google: any;
 declare var MarkerClusterer: any;
@@ -46,6 +47,7 @@ export class HomePage {
   responseData: any;
   location: any;
   locationList: any;
+  loginInfo: {"username" : ""};
 
   constructor(
     private authservice: AuthServiceProvider,
@@ -89,6 +91,10 @@ export class HomePage {
       this.responseData = err.error;
       alert(this.responseData.message);
     });
+
+    this.loginInfo = JSON.parse(localStorage.getItem('infologin'));
+    console.log(this.loginInfo);
+    console.log(this.loginInfo.username);
   }
 
   viewPlace(id) {
@@ -518,5 +524,9 @@ export class HomePage {
 
   requestproduct(){
     this.nav.push(RequestproductPage);
+    }
+
+  requestlist(){
+    this.nav.push(RequestlistPage);
     }
 }

@@ -4,12 +4,13 @@
       Smartfren Mapping
     </ion-title>
     <ion-buttons end>
-      <button ion-button color="primary" id="addProduct" (click)="addproduct()">Add Product</button>
-      <button ion-button color="primary" (click)="addlocation()">Add Location</button>
+      <button ion-button color="primary" *ngIf="loginInfo.username == 'admin' " id="addProduct" (click)="addproduct()">Add Product</button>
+      <button ion-button color="primary" *ngIf="loginInfo.username == 'admin' " (click)="addlocation()">Add Location</button>
       <button ion-button color="primary" (click)="updatestock()">Update Stock</button>
       <button ion-button color="primary" (click)="finance()">Finance</button>
       <button ion-button color="primary" (click)="graph()">Report</button>
-      <button ion-button color="primary" (click)="requestproduct()">Request</button>
+      <button ion-button color="primary" *ngIf="loginInfo.username != 'admin' " (click)="requestproduct()">Request</button>
+      <button ion-button color="primary" (click)="requestlist()">Request List</button>
       <button ion-button color="primary" (click)="logout()">Logout</button>
       <button ion-button icon-only (click)='toggleSearch()'>
         <ion-icon name="search"></ion-icon>
