@@ -45,16 +45,53 @@ export class GraphPage implements OnInit {
   barChart: any;
   doughnutChart: any;
   lineChart: any;
+  infograph= { "years": "", "quartal": ""};
+  loginInfo: {"username" : ""};
+  
 
   constructor(private navCtrl: NavController, private navParams: NavParams, private authservice: AuthServiceProvider) {}
 
     ngOnInit() {
-    this.authservice.getData('financelist.php').subscribe(data => {
+    this.authservice.getData('locationlist.php').subscribe(data => {
 
       this.responseData = data;
+      this.location = this.responseData;
+      this.locationList = this.location.records;
+      console.log(this.locationList);
+
+    }, (err: HttpErrorResponse) => {
+      console.log(err.error);
+      this.responseData = err.error;
+      alert(this.responseData.message);
+    });
+
+    this.loginInfo = JSON.parse(localStorage.getItem('infologin'));
+    console.log(this.loginInfo);
+    console.log(this.loginInfo.username);
+
+}
+
+  async requestFinanceData(){
+    if (this.loginInfo.username != "admin"){
+      this.infograph.locationID = this.loginInfo.locationID ;
+      
+    }
+
+    var id = this.infograph.locationID;
+    var year = this.infograph.years;
+    var quartal = this.infograph.quartal;
+    var months = quartal.split(",");
+    var start = months[0];
+    var end = months[1];
+    let url = "financelist.php?id=" + id + "&year=" + year + "&start=" + start + "&end=" + end ;
+    console.log(url);
+    this.authservice.getData(url).subscribe(data => {
+
+      this.responseData =  data;
       this.finance = this.responseData;
       this.financeList = this.finance.records;
       console.log(this.financeList);
+      this.generategraph();
       //this.makeGraph();
 
     }, (err: HttpErrorResponse) => {
@@ -62,11 +99,18 @@ export class GraphPage implements OnInit {
       this.responseData = err.error;
       alert(this.responseData.message);
     });
-}
 
-  makeGraph() {
+    
+  }
 
-      var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  async makeGraph() {
+
+    await  this.requestFinanceData();
+
+  }
+
+  async generategraph() {
+    var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       var labelList = [];
       var dataList = [];
       var expenseList = [];
@@ -98,33 +142,33 @@ export class GraphPage implements OnInit {
                   label: 'Income',
                   data: dataList,
                   backgroundColor: [
-                      'rgba(255, 99, 132, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(255, 206, 86, 0.2)',
-                      'rgba(75, 192, 192, 0.2)',
-                      'rgba(153, 102, 255, 0.2)',
-                      'rgba(255, 159, 64, 0.2)',
-                      'rgba(75, 192, 192, 0.2)',
-                      'rgba(170, 27, 151, 0.2)',
-                      'rgba(255, 233, 0, 0.2)',
-                      'rgba(255, 0, 0, 0.2)',
-                      'rgba(0, 255, 0, 0.2)',
-                      'rgba(0, 0, 255, 0.2)'
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(152, 66, 244, 0.2)',
+                    'rgba(65, 244, 214, 0.2)',
+                    'rgba(154, 244, 65, 0.2)',
+                    'rgba(255, 0, 0, 0.2)',
+                    'rgba(0, 255, 0, 0.2)',
+                    'rgba(0, 0, 255, 0.2)'
                                                                                                                                     
                   ],
-                  borderColor: [
-                      'rgba(255, 99, 132, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(255, 206, 86, 0.2)',
-                      'rgba(75, 192, 192, 0.2)',
-                      'rgba(153, 102, 255, 0.2)',
-                      'rgba(255, 159, 64, 0.2)',
-                      'rgba(75, 192, 192, 0.2)',
-                      'rgba(170, 27, 151, 0.2)',
-                      'rgba(255, 233, 0, 0.2)',
-                      'rgba(255, 0, 0, 0.2)',
-                      'rgba(0, 255, 0, 0.2)',
-                      'rgba(0, 0, 255, 0.2)'
+                  hoverBackgroundColor: [
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56",
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56",
+                    "#9842f4",
+                    "#41f4d6",
+                    "#9af441",
+                    "#ff0000",
+                    "#00ff00",
+                    "#0000ff"
                   ],
                   borderWidth: 1
               }]
@@ -156,9 +200,9 @@ export class GraphPage implements OnInit {
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(153, 102, 255, 0.2)',
                     'rgba(255, 159, 64, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(170, 27, 151, 0.2)',
-                    'rgba(255, 233, 0, 0.2)',
+                    'rgba(152, 66, 244, 0.2)',
+                    'rgba(65, 244, 214, 0.2)',
+                    'rgba(154, 244, 65, 0.2)',
                     'rgba(255, 0, 0, 0.2)',
                     'rgba(0, 255, 0, 0.2)',
                     'rgba(0, 0, 255, 0.2)'
@@ -169,7 +213,13 @@ export class GraphPage implements OnInit {
                       "#FFCE56",
                       "#FF6384",
                       "#36A2EB",
-                      "#FFCE56"
+                      "#FFCE56",
+                      "#9842f4",
+                      "#41f4d6",
+                      "#9af441",
+                      "#ff0000",
+                      "#00ff00",
+                      "#0000ff"
                   ]
               }]
           }
@@ -185,32 +235,37 @@ export class GraphPage implements OnInit {
                 label: 'Sales',
                 data: salesList,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(170, 27, 151, 0.2)',
-                    'rgba(255, 233, 0, 0.2)',
-                    'rgba(255, 0, 0, 0.2)',
-                    'rgba(0, 255, 0, 0.2)',
-                    'rgba(0, 0, 255, 0.2)'
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(152, 66, 244, 0.2)',
+                  'rgba(65, 244, 214, 0.2)',
+                  'rgba(154, 244, 65, 0.2)',
+                  'rgba(255, 0, 0, 0.2)',
+                  'rgba(0, 255, 0, 0.2)',
+                  'rgba(0, 0, 255, 0.2)'
                 ],
                 hoverBackgroundColor: [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56",
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
+                  "#FF6384",
+                  "#36A2EB",
+                  "#FFCE56",
+                  "#FF6384",
+                  "#36A2EB",
+                  "#FFCE56",
+                  "#9842f4",
+                  "#41f4d6",
+                  "#9af441",
+                  "#ff0000",
+                  "#00ff00",
+                  "#0000ff"
                 ]
             }]
         }
 
     });
-
   }
 
 

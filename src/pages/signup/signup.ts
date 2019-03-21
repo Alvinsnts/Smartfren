@@ -27,7 +27,7 @@ export class SignupPage implements OnInit {
   locationList: any;
   locationStatus: any;
   registerStatus: any;
-  infosignup= {"username": "","email": "", "password": "", "role": ""}
+  infosignup= {"username": "","email": "", "password": ""}
   
   constructor(private navCtrl: NavController, private navParams: NavParams, private authservice: AuthServiceProvider) {
   }

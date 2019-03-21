@@ -7,6 +7,33 @@
   </ion-header>
   
   <ion-content>
+
+      <ion-item *ngIf="loginInfo.username == 'admin' ">
+          <ion-label *ngIf="loginInfo.username == 'admin' " >Outlet Name</ion-label>
+          <ion-select [(ngModel)]="infograph.locationID" value="" ok-text="Okay" cancel-text="Dismiss"  *ngIf="loginInfo.username == 'admin' ">
+          <ion-option *ngFor="let locations of locationList" value="{{locations.locationID}}">{{locations.name}}</ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label>Years</ion-label>
+          <ion-select [(ngModel)]="infograph.years" value="" ok-text="Okay" cancel-text="Dismiss">
+            <ion-option value="2017">2017</ion-option>
+            <ion-option value="2018">2018</ion-option>
+            <ion-option value="2019">2019</ion-option>
+            <ion-option value="2020">2020</ion-option>
+            <ion-option value="2021">2021</ion-option>
+            <ion-option value="2022">2022</ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label>Quartal</ion-label>
+          <ion-select [(ngModel)]="infograph.quartal" value="" ok-text="Okay" cancel-text="Dismiss">
+            <ion-option value="1,3">Quartal 1 (January - March)</ion-option>
+            <ion-option value="4,6">Quartal 2 (April - June)</ion-option>
+            <ion-option value="7,9">Quartal 3 (July - September)</ion-option>
+            <ion-option value="10,12">Quartal 4 (October - Desember)</ion-option>
+          </ion-select>
+      </ion-item>
     <button ion-button shape="round" size="full" color="primary" (click)="makeGraph()">Make Graph</button>
 
       <ion-card>

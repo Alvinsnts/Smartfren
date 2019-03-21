@@ -27,8 +27,8 @@
 
         <ion-item>
           <ion-label>Outlet Name</ion-label>
-          <ion-select [(ngModel)]="infosignup.locationName" value="" ok-text="Okay" cancel-text="Dismiss">
-          <ion-option *ngFor="let locations of locationList" value="{{locations.name}}">{{locations.name}}</ion-option>
+          <ion-select [(ngModel)]="infosignup.locationID" value="" ok-text="Okay" cancel-text="Dismiss">
+          <ion-option *ngFor="let locations of locationList" value="{{locations.locationID}}">{{locations.name}}</ion-option>
           </ion-select>
         </ion-item>
 

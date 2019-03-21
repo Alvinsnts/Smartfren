@@ -30,7 +30,7 @@ export class FinancePage {
   finance: any;
   financeList: any;
   financeStatus: any;
-  financeinfo= {"locationName": "", "months": "", "years:": "", "income": "", "expenses": "", "sales": ""};
+  financeinfo= {"locationID": "", "months": "", "years:": "", "income": "", "expenses": "", "sales": ""};
   constructor(private navCtrl: NavController, private navParams: NavParams, private authservice: AuthServiceProvider, private toastCtrl: ToastController) {}
 
   ngOnInit() {
