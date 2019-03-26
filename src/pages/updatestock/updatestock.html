@@ -14,12 +14,6 @@
 <ion-content padding>
 
   <ion-item>
-    <ion-label>Outlet Name</ion-label>
-    <ion-select [(ngModel)]="stockinfo.locationName" value="" ok-text="Okay" cancel-text="Dismiss">
-    <ion-option *ngFor="let locations of locationList" value="{{locations.name}}">{{locations.name}}</ion-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
     <ion-label>Product Name</ion-label>
     <ion-select [(ngModel)]="stockinfo.productname" value="" ok-text="Okay" cancel-text="Dismiss">
     <ion-option *ngFor="let products of productList" value="{{products.productname}}">{{products.productname}}</ion-option>
@@ -27,7 +21,7 @@
   </ion-item>
   <ion-item>
     <ion-label fixed>Quantity</ion-label>
-    <ion-input type="text" [(ngModel)]="stockinfo.quantity"></ion-input>
+    <ion-input type="number" [(ngModel)]="stockinfo.quantity"></ion-input>
   </ion-item>
 
   <button ion-button shape="round" size="full" color="primary" (click)="updateStock()">Update Stock</button>

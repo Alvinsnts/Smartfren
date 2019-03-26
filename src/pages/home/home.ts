@@ -107,8 +107,8 @@ export class HomePage {
   getMarkers() {
     var data = this.locationList ;
     this.addMarkersToMap(data);
-
   }
+  
   addMarkersToMap(markers) {
     for(let marker of markers) {
       var position = new google.maps.LatLng(marker.latitude, marker.longitude);

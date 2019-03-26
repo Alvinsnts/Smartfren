@@ -9,8 +9,15 @@
   <ion-navbar>
     <ion-title>Add Location</ion-title>
   </ion-navbar>
-
 </ion-header>
+
+
+<div class="currentitem" *ngIf="currentregional">
+  <button ion-item no-lines (click)="viewPlace(currentregional.title)">
+    <h2>{{ currentregional.title }}</h2>
+    <ion-note item-right icon-only><ion-icon name="ios-arrow-forward"></ion-icon></ion-note>
+  </button>
+</div>
 
 
 <ion-content padding>
@@ -22,26 +29,23 @@
         
         <ion-item>
             <ion-label fixed>Phone Number</ion-label>
-            <ion-input type="text" [(ngModel)]="locationinfo.locationPhone"></ion-input>
+            <ion-input type="number" [(ngModel)]="locationinfo.locationPhone"></ion-input>
         </ion-item>
 
         <ion-item>
-              <ion-label fixed>Open Time</ion-label>
-              <ion-input type="text" [(ngModel)]="locationinfo.locationTime"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label fixed>Longitude</ion-label>
-          <ion-input type="text"  [(ngModel)]="locationinfo.locationLong"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label fixed>Latitude</ion-label>
-          <ion-input type="text"  [(ngModel)]="locationinfo.locationLat"></ion-input>
+              <ion-label fixed>Operating Hour</ion-label>
+              <ion-input type="number" [(ngModel)]="locationinfo.locationTime"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label fixed>Address</ion-label>
           <ion-input type="text"  [(ngModel)]="locationinfo.locationAddress"></ion-input>
         </ion-item>
-      
+
+        <div class="map" [class.hidemap]="!((switch == 'map') || error)">
+          <ion-searchbar #searchbar placeholder="Location"></ion-searchbar>
+          <div id="map" #map></div>
+        </div>
+
         <button ion-button black color="primary" (click)="addLocation()">Add New Location</button>
     </ion-list>
 </ion-content>

@@ -1,23 +1,17 @@
-<ion-header>
 
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding class="background">
+<ion-content>
   <ion-list>
-    <ion-item>
-      <ion-label fixed>Username</ion-label>
-      <ion-input type="text"  [(ngModel)]="infologin.username"></ion-input>
+      <a class="t1">Smartfren</a>
+      <a class="t2">Mapping</a>
+    <ion-item class="text">
+      <ion-label>Username</ion-label>
+      <ion-input type="text" [(ngModel)]="infologin.username"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label fixed>Password</ion-label>
-      <ion-input type="password"  [(ngModel)]="infologin.password"></ion-input>
+    <ion-item class="pw">
+      <ion-label>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="infologin.password"></ion-input>
     </ion-item>  
-    <button ion-button black color="primary" (click)="login()">Login</button>    
+    <button ion-button black color="danger" class="login" (click)="login()">Login</button>    
   </ion-list>
 
 </ion-content>

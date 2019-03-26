@@ -1,5 +1,61 @@
 page-login {
-    .background {
-        background-image: '../../assets/imgs/bg.jpg';
+    ion-content 
+    {
+        background-image: url("../../assets/imgs/bg.jpg");
+        background-size: cover;
     }
+
+    .t1
+    {
+        position: relative;
+        top: 80px;
+        left: 120px;
+        font-size: 30px;
+        color: #f6f6f6;
+    }
+    .t2
+    {
+        position: relative;
+        top: 120px;
+        right: 10px;
+        font-size: 30px;
+        color: #f6f6f6;
+    }
+
+    .login
+    {
+        position: relative;
+        top: 200px;
+        left: 44px;
+        width: 75%;
+        height: 35px;
+        text-align: center;
+        font-size: 15px;
+        color: #ffffff;
+    
+    }
+
+    .text
+    {
+        position: relative;
+        top: 200px;
+        width: 75%;
+        height: 35px;
+        border: 2px solid #f6f6f6;
+        margin: 0 auto;
+    }
+
+    .pw
+    {
+        position: relative;
+        top: 200px;
+        width: 75%;
+        height: 35px;
+        border: 2px solid #f6f6f6;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+
 }

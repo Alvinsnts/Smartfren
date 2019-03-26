@@ -23,7 +23,8 @@ export class UpdatestockPage implements OnInit{
   stock: any;
   stockList: any;
   stockStatus: any;
-  stockinfo = {"locationName": "", "productname": "", "quantity": ""};
+  stockinfo = {"locationID": "", "productname": "", "quantity": ""};
+  loginInfo: {"username" : string, "locationID": ""};
   constructor(private navCtrl: NavController, private navParams: NavParams, private authservice: AuthServiceProvider) {}
 
   ngOnInit() {
@@ -51,9 +52,13 @@ export class UpdatestockPage implements OnInit{
       this.responseData = err.error;
       alert(this.responseData.message);
     });
+    
+    this.loginInfo = JSON.parse(localStorage.getItem('infologin'));
   }
+
   updateStock(){
 
+    this.stockinfo.locationID = this.loginInfo.locationID ;
     console.log(this.stockinfo);
     this.authservice.postdata('updatestock.php', this.stockinfo).subscribe(res =>{
   

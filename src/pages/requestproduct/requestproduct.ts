@@ -34,7 +34,8 @@ export class RequestproductPage implements OnInit{
   request: any;
   requestList: any;
   requestStatus: any;
-  requestinfo = {"locationName": "", "productname": "", "quantity": ""};
+  requestinfo = {"locationID": "", "productname": "", "quantity": ""};
+  loginInfo: {"username" : string, "locationID": ""};
   constructor(private navCtrl: NavController, private navParams: NavParams, private authservice: AuthServiceProvider) {}
 
   ngOnInit() {
@@ -62,9 +63,14 @@ export class RequestproductPage implements OnInit{
       this.responseData = err.error;
       alert(this.responseData.message);
     });
+
+    this.loginInfo = JSON.parse(localStorage.getItem('infologin'));
+
   }
+
   requestProduct(){
 
+    this.requestinfo.locationID = this.loginInfo.locationID ;
     console.log(this.requestinfo);
     this.authservice.postdata('sendrequest.php', this.requestinfo).subscribe(res =>{
   

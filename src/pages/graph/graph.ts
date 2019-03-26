@@ -45,8 +45,8 @@ export class GraphPage implements OnInit {
   barChart: any;
   doughnutChart: any;
   lineChart: any;
-  infograph= { "years": "", "quartal": ""};
-  loginInfo: {"username" : ""};
+  infograph= { "years": "", "quartal": "", "locationID": ""};
+  loginInfo: {"username" : string, "locationID": ""};
   
 
   constructor(private navCtrl: NavController, private navParams: NavParams, private authservice: AuthServiceProvider) {}
@@ -72,7 +72,8 @@ export class GraphPage implements OnInit {
 }
 
   async requestFinanceData(){
-    if (this.loginInfo.username != "admin"){
+    var abc = this.loginInfo.username;
+    if ( abc != "admin"){
       this.infograph.locationID = this.loginInfo.locationID ;
       
     }
