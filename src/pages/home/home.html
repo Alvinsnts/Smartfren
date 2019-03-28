@@ -12,6 +12,7 @@
       <button ion-button color="primary" *ngIf="loginInfo.username != 'admin' " (click)="requestproduct()">Request</button>
       <button ion-button color="primary" (click)="requestlist()">Request List</button>
       <button ion-button color="primary" *ngIf="loginInfo.username == 'admin' " (click)="signup()">Signup</button>
+      <button ion-button color="primary" (click)="summary()">Summary</button>
       <button ion-button color="primary" (click)="logout()">Logout</button>
       <button ion-button icon-only (click)='toggleSearch()'>
         <ion-icon name="search"></ion-icon>

@@ -39,7 +39,7 @@ export class GraphPage implements OnInit {
   stockList: any;
   stockStatus: any;
   stockinfo = {"locationName": "", "productname": "", "quantity": ""};
-  finance; any;
+  finance: any;
   financeList: any;
   financeStatus: any;
   barChart: any;
@@ -221,9 +221,19 @@ export class GraphPage implements OnInit {
                       "#ff0000",
                       "#00ff00",
                       "#0000ff"
-                  ]
+                  ],
+                  borderWidth: 1
               }]
-          }
+          },
+          options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
 
       });
 
@@ -262,9 +272,20 @@ export class GraphPage implements OnInit {
                   "#ff0000",
                   "#00ff00",
                   "#0000ff"
-                ]
+                ],
+                borderWidth: 1
+
             }]
-        }
+        },
+        options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
 
     });
   }

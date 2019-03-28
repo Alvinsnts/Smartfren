@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-navbar color="danger">
+      <ion-title>
+        Monthly Report
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+      <ion-item>
+          <ion-label>Months</ion-label>
+          <ion-select [(ngModel)]="summaryinfo.months" value="" ok-text="Okay" cancel-text="Dismiss">
+            <ion-option value="1">January</ion-option>
+            <ion-option value="2">February</ion-option>
+            <ion-option value="3">March</ion-option>
+            <ion-option value="4">April</ion-option>
+            <ion-option value="5">May</ion-option>
+            <ion-option value="6">June</ion-option>
+            <ion-option value="7">July</ion-option>
+            <ion-option value="8">August</ion-option>
+            <ion-option value="9">September</ion-option>
+            <ion-option value="10">October</ion-option>
+            <ion-option value="11">November</ion-option>
+            <ion-option value="12">December</ion-option>
+          </ion-select>
+          </ion-item>
+      <ion-item>
+          <ion-label>Years</ion-label>
+          <ion-select [(ngModel)]="summaryinfo.years" value="" ok-text="Okay" cancel-text="Dismiss">
+            <ion-option value="2017">2017</ion-option>
+            <ion-option value="2018">2018</ion-option>
+            <ion-option value="2019">2019</ion-option>
+            <ion-option value="2020">2020</ion-option>
+            <ion-option value="2021">2021</ion-option>
+            <ion-option value="2022">2022</ion-option>
+          </ion-select>
+      </ion-item>
+    <button ion-button shape="round" size="full" color="primary" (click)="makeGraph()">Generate</button>
+
+    <ion-grid>
+        <ion-row>
+          <ion-col style="background-color:khaki"> Location </ion-col>
+          <ion-col style="background-color:khaki"> Income </ion-col>
+          <ion-col style="background-color:khaki"> Expenses </ion-col>
+          <ion-col style="background-color:khaki"> Sales </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let summary of summaryList">
+            <ion-col> {{summary.locationName}} </ion-col>
+            <ion-col> {{summary.income}} </ion-col>
+            <ion-col> {{summary.expenses}} </ion-col>
+            <ion-col> {{summary.sales}} </ion-col>
+          </ion-row>
+    </ion-grid>
+  </ion-content>

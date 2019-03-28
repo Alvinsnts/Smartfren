@@ -17,6 +17,7 @@ import { UpdatestockPage } from '../updatestock/updatestock';
 import { FinancePage } from '../finance/finance';
 import { RequestproductPage } from '../requestproduct/requestproduct';
 import { RequestlistPage } from '../requestlist/requestlist';
+import { SummaryPage } from '../summary/summary';
 
 declare var google: any;
 declare var MarkerClusterer: any;
@@ -529,4 +530,9 @@ export class HomePage {
   requestlist(){
     this.nav.push(RequestlistPage);
     }
+    
+  summary(){
+    this.nav.push(SummaryPage);
+    }
+
 }
