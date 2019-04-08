@@ -31,6 +31,9 @@ export class FinancePage {
   financeList: any;
   financeStatus: any;
   financeinfo= {"locationID": "", "months": "", "years:": "", "income": "", "expenses": "", "sales": ""};
+  loginInfo: {"username" : string, "locationID": ""};
+
+  
   constructor(private navCtrl: NavController, private navParams: NavParams, private authservice: AuthServiceProvider, private toastCtrl: ToastController) {}
 
   ngOnInit() {
@@ -46,10 +49,14 @@ export class FinancePage {
       this.responseData = err.error;
       alert(this.responseData.message);
     });
+
+    this.loginInfo = JSON.parse(localStorage.getItem('infologin'));
+    
   }
 
   updateInfo(){
 
+    this.financeinfo.locationID = this.loginInfo.locationID;
     console.log(this.financeinfo);
     this.authservice.postdata('finance.php', this.financeinfo).subscribe(res =>{
   
@@ -61,7 +68,6 @@ export class FinancePage {
         this.responses = JSON.stringify(this.responses);
         localStorage.setItem("productdata", this.responses);
         this.navCtrl.push(HomePage);
-        
     }, (err: HttpErrorResponse) => 
     {
       console.log(err.error);

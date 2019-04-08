@@ -14,12 +14,6 @@
 <ion-content padding>
 
   <ion-item>
-    <ion-label>Outlet Name</ion-label>
-    <ion-select [(ngModel)]="financeinfo.locationID" value="" ok-text="Okay" cancel-text="Dismiss">
-    <ion-option *ngFor="let locations of locationList" value="{{locations.locationID}}">{{locations.name}}</ion-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
   <ion-label>Months</ion-label>
   <ion-select [(ngModel)]="financeinfo.months" value="" ok-text="Okay" cancel-text="Dismiss">
     <ion-option value="1">January</ion-option>
