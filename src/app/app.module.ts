@@ -23,6 +23,7 @@ import { FinancePage } from '../pages/finance/finance';
 import { RequestproductPage } from '../pages/requestproduct/requestproduct';
 import { RequestlistPage } from '../pages/requestlist/requestlist';
 import { SummaryPage } from '../pages/summary/summary';
+import { CheckstockPage } from '../pages/checkstock/checkstock';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SummaryPage } from '../pages/summary/summary';
     FinancePage,
     RequestproductPage,
     RequestlistPage,
-    SummaryPage
+    SummaryPage,
+    CheckstockPage
   ],
   imports: [
     BrowserModule, HttpModule, HttpClientModule,
@@ -59,7 +61,8 @@ import { SummaryPage } from '../pages/summary/summary';
     FinancePage,
     RequestproductPage,
     RequestlistPage,
-    SummaryPage
+    SummaryPage,
+    CheckstockPage
   ],
   providers: [
     StatusBar,
