@@ -41,5 +41,8 @@ export class AddproductPage implements OnInit {
       alert(this.responses.message);
     });
   }
-
+  
+  back(){
+    this.navCtrl.push(HomePage);
+    }
 }

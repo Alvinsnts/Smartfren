@@ -519,4 +519,7 @@ export class AddnewlocationPage{
     });
   }
 
+  back(){
+    this.nav.push(HomePage);
+    }
 }

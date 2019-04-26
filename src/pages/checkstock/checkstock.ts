@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { HomePage } from '../../pages/home/home';
 /**
  * Generated class for the CheckstockPage page.
  *
@@ -42,4 +43,7 @@ export class CheckstockPage {
       alert(this.responseData.message);
     });
   }
+  back(){
+    this.navCtrl.push(HomePage);
+    }
 }

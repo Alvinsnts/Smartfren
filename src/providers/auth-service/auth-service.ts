@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 
 const apiUrl = 'http://smartfrenmapping.xyz/api/product';
 
+
 @Injectable()
 export class AuthServiceProvider {
 
@@ -25,5 +26,4 @@ export class AuthServiceProvider {
   getData(url){
     return this.http.get(`${apiUrl}/${url}`);
   }
-
 }

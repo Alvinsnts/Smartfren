@@ -2,11 +2,17 @@
     <ion-title>
         Smartfren Mapping
     </ion-title>
-  <ion-navbar>
-    <ion-buttons end>
+  <ion-buttons>
+      <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+  </ion-buttons>
+  <ion-navbar hideBackButton>
+    <ion-buttons start>
       <button ion-button color="primary" *ngIf="loginInfo.username == 'admin' " id="addProduct" (click)="addproduct()">Add Product</button>
       <button ion-button color="primary" *ngIf="loginInfo.username == 'admin' " (click)="addlocation()">Add Location</button>
       <button ion-button color="primary" *ngIf="loginInfo.username != 'admin' " (click)="updatestock()">Update Stock</button>
+      <button ion-button color="primary" (click)="checkstock()">Check Stock</button>
       <button ion-button color="primary" (click)="finance()">Finance</button>
       <button ion-button color="primary" (click)="graph()">Report</button>
       <button ion-button color="primary" *ngIf="loginInfo.username != 'admin' " (click)="requestproduct()">Request</button>
@@ -14,7 +20,6 @@
       <button ion-button color="primary" *ngIf="loginInfo.username == 'admin' " (click)="signup()">Signup</button>
       <button ion-button color="primary" *ngIf="loginInfo.username == 'admin' "(click)="summary()">Summary</button>
       <button ion-button color="primary" (click)="logout()">Logout</button>
-      <button ion-button color="primary" (click)="checkstock()">Check Stock</button>
       <button ion-button icon-only (click)='toggleSearch()'>
         <ion-icon name="search"></ion-icon>
       </button>
