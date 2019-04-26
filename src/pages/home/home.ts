@@ -35,6 +35,10 @@ export class HomePage {
   @ViewChild('barChart') barChart;
   @ViewChild('lineChart') lineChart;
 
+  loginInfo: {"username" : any};
+  rootPage = Login;
+  pages: Array<{title: string, component: any}>;
+
   addressElement: HTMLInputElement = null;
   infoWindows: any;
   listSearch: string = '';
@@ -49,7 +53,7 @@ export class HomePage {
   responseData: any;
   location: any;
   locationList: any;
-  loginInfo: {"username" : ""};
+  //loginInfo: {"username" : ""};
 
   constructor(
     private authservice: AuthServiceProvider,
@@ -97,8 +101,39 @@ export class HomePage {
     this.loginInfo = JSON.parse(localStorage.getItem('infologin'));
     console.log(this.loginInfo);
     console.log(this.loginInfo.username);
+    if(this.loginInfo.username == 'admin')
+    {
+      this.pages = [
+        { title: 'Home', component: HomePage },
+        { title: 'Add Product', component: AddproductPage },
+        { title: 'Add Location', component: AddnewlocationPage },
+        { title: 'Check Stock', component: CheckstockPage },
+        { title: 'Finance', component: FinancePage },
+        { title: 'Report', component: GraphPage },
+        { title: 'Request List', component: RequestlistPage },
+        { title: 'Summary', component: SummaryPage },
+        { title: 'Signup', component: SignupPage }
+      ];
+    }
+    else
+    {
+      this.pages = [
+        { title: 'Home', component: HomePage },
+        { title: 'Update stock', component: UpdatestockPage },
+        { title: 'Check Stock', component: UpdatestockPage },
+        { title: 'Finance', component: FinancePage },
+        { title: 'Report', component: GraphPage },
+        { title: 'Request', component: RequestproductPage },
+        { title: 'Request List', component: RequestlistPage },
+      ];
+    }
   }
 
+  openPage(page) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.nav.setRoot(page.component);
+  }
   viewPlace(id) {
     console.log('Clicked Marker', id);
   }
@@ -492,6 +527,7 @@ export class HomePage {
 
   logout(){
     // Remove API token 
+    localStorage.removeItem('logininfo')
     const root = this.app.getRootNav();
     root.popToRoot();
   }

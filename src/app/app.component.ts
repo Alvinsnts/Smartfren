@@ -34,86 +34,92 @@ export class MyApp {
       this.SplashScreen.hide();
     });
   }
-  ngOnInit() {
+//   ngOnInit() {
 
-    this.loginInfo = JSON.parse(localStorage.getItem('infologin'));
-    console.log(this.loginInfo);
-    console.log(this.loginInfo.username);
-    if(this.loginInfo.username == 'admin')
-    {
-      this.pages = [
-        { title: 'Home', component: HomePage },
-        { title: 'Add Product', component: AddproductPage },
-        { title: 'Add Location', component: AddnewlocationPage },
-        { title: 'Check Stock', component: CheckstockPage },
-        { title: 'Finance', component: FinancePage },
-        { title: 'Report', component: GraphPage },
-        { title: 'Request List', component: RequestlistPage },
-        { title: 'Summary', component: SummaryPage },
-        { title: 'Signup', component: SignupPage }
-      ];
-    }
-    else
-    {
-      this.pages = [
-        { title: 'Home', component: HomePage },
-        { title: 'Add Product', component: AddproductPage },
-      ];
-    }
+//     this.loginInfo = JSON.parse(localStorage.getItem('infologin'));
+//     console.log(this.loginInfo);
+//     console.log(this.loginInfo.username);
+//     if(this.loginInfo.username == 'admin')
+//     {
+//       this.pages = [
+//         { title: 'Home', component: HomePage },
+//         { title: 'Add Product', component: AddproductPage },
+//         { title: 'Add Location', component: AddnewlocationPage },
+//         { title: 'Check Stock', component: CheckstockPage },
+//         { title: 'Finance', component: FinancePage },
+//         { title: 'Report', component: GraphPage },
+//         { title: 'Request List', component: RequestlistPage },
+//         { title: 'Summary', component: SummaryPage },
+//         { title: 'Signup', component: SignupPage }
+//       ];
+//     }
+//     else
+//     {
+//       this.pages = [
+//         { title: 'Home', component: HomePage },
+//         { title: 'Update stock', component: UpdatestockPage },
+//         { title: 'Check Stock', component: UpdatestockPage },
+//         { title: 'Finance', component: FinancePage },
+//         { title: 'Report', component: GraphPage },
+//         { title: 'Request', component: RequestproductPage },
+//         { title: 'Request List', component: RequestlistPage },
+//       ];
+//     }
 
-  }
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
-  }
-  logout(){
-    // Remove API token 
-    const root = this.app.getRootNav();
-    root.popToRoot();
-  }
+//   }
+//   openPage(page) {
+//     // Reset the content nav to have just this page
+//     // we wouldn't want the back button to show in this scenario
+//     this.nav.setRoot(page.component);
+//   }
+//   logout(){
+//     // Remove API token 
+//     localStorage.removeItem('logininfo')
+//     const root = this.app.getRootNav();
+//     root.popToRoot();
+//   }
 
-  login(){
-    this.nav.push(Login);
-    }
+//   login(){
+//     this.nav.push(Login);
+//     }
 
-  signup(){
-    this.nav.push(SignupPage);
-    }
+//   signup(){
+//     this.nav.push(SignupPage);
+//     }
 
-  addproduct(){
-    this.nav.push(AddproductPage);
-    }
+//   addproduct(){
+//     this.nav.push(AddproductPage);
+//     }
 
-  addlocation(){
-    this.nav.push(AddnewlocationPage);
-    }
+//   addlocation(){
+//     this.nav.push(AddnewlocationPage);
+//     }
     
-  graph(){
-    this.nav.push(GraphPage);
-    }
+//   graph(){
+//     this.nav.push(GraphPage);
+//     }
 
-  updatestock(){
-    this.nav.push(UpdatestockPage);
-    }
+//   updatestock(){
+//     this.nav.push(UpdatestockPage);
+//     }
 
-  finance(){
-    this.nav.push(FinancePage);
-    }
+//   finance(){
+//     this.nav.push(FinancePage);
+//     }
 
-  requestproduct(){
-    this.nav.push(RequestproductPage);
-    }
+//   requestproduct(){
+//     this.nav.push(RequestproductPage);
+//     }
 
-  requestlist(){
-    this.nav.push(RequestlistPage);
-    }
+//   requestlist(){
+//     this.nav.push(RequestlistPage);
+//     }
     
-  summary(){
-    this.nav.push(SummaryPage);
-    }
+//   summary(){
+//     this.nav.push(SummaryPage);
+//     }
 
-  checkstock(){
-    this.nav.push(CheckstockPage);
-    }
-}
+//   checkstock(){
+//     this.nav.push(CheckstockPage);
+//     }
+ }
