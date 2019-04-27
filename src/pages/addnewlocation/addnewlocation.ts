@@ -120,10 +120,6 @@ export class AddnewlocationPage{
     });
   }
 
-
-
-
-
   viewPlace(id) {
     console.log('Clicked Marker', id);
   }
@@ -154,7 +150,9 @@ export class AddnewlocationPage{
   }
   addInfoWindowToMarker(marker) {
     var infoWindowContent = 
-    '<div id="content"><h1 id="firstHeading" class="firstHeading">' + marker.title + '</h1><label id="secondHeading" class="secondHeading">' + "ID : " + marker.locationid + '</label><br /> <label id="secondHeading" class="secondHeading">' + "Phone Number : " + marker.contact + '</label><br /><label id="secondHeading" class="secondHeading">' + "Open Time : " + marker.opentime + '</label><br /><label id="secondHeading" class="secondHeading">' + "Address : " + marker.locationaddress + '</label><br /><button type="buttton" onclick="document.getElementById(\'addProduct\').click();">Add Product</button></div>';
+    '<div id="content"><h1 id="firstHeading" class="firstHeading">' + marker.title + '</h1><label id="secondHeading" class="secondHeading">' + "ID : " + marker.locationid + '</label><br /> <label id="secondHeading" class="secondHeading">' + "Phone Number : " + marker.contact + '</label><br /><label id="secondHeading" class="secondHeading">' + "Open Time : " + marker.opentime + '</label><br /><label id="secondHeading" class="secondHeading">' + "Address : " + marker.locationaddress + '</label><br /></div>';
+    //'<div id="content"><h1 id="firstHeading" class="firstHeading">' + marker.title + '</h1><label id="secondHeading" class="secondHeading">' + "ID : " + marker.locationid + '</label><br /> <label id="secondHeading" class="secondHeading">' + "Phone Number : " + marker.contact + '</label><br /><label id="secondHeading" class="secondHeading">' + "Open Time : " + marker.opentime + '</label><br /><label id="secondHeading" class="secondHeading">' + "Address : " + marker.locationaddress + '</label><br /><button type="buttton" onclick="document.getElementById(\'addProduct\').click();">Add Product</button></div>';
+
     var infoWindow = new google.maps.InfoWindow({
       content: infoWindowContent
     });
@@ -522,4 +520,7 @@ export class AddnewlocationPage{
   back(){
     this.nav.push(HomePage);
     }
+  pop(){
+    this.nav.push(HomePage);
+  }
 }

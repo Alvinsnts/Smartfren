@@ -10,7 +10,17 @@
         <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
           {{p.title}}
         </button>
-        <button ion-button color="primary" (click)="logout()">Logout</button>
+        <button ion-button class="addproduct" color="primary" *ngIf="loginInfo.username == 'admin' " id="addProduct" (click)="addproduct()">Add Product</button><br>
+        <button ion-button class="addlocation" color="primary" *ngIf="loginInfo.username == 'admin' " (click)="addlocation()">Add Location</button><br>
+        <button ion-button class="updatestock" color="primary" *ngIf="loginInfo.username != 'admin' " (click)="updatestock()">Update Stock</button><br>
+        <button ion-button class="checkstock" color="primary" (click)="checkstock()">Check Stock</button><br>
+        <button ion-button class="finance" color="primary" (click)="finance()">Finance</button><br>
+        <button ion-button class="report" color="primary" (click)="graph()">Report</button><br>
+        <button ion-button class="requestproduct" color="primary" *ngIf="loginInfo.username != 'admin' " (click)="requestproduct()">Request</button><br>
+        <button ion-button class="requestlist" color="primary" (click)="requestlist()">Request List</button><br>
+        <button ion-button class="signup" color="primary" *ngIf="loginInfo.username == 'admin' " (click)="signup()">Signup</button><br>
+        <button ion-button class="summary" color="primary" *ngIf="loginInfo.username == 'admin' "(click)="summary()">Summary</button><br>
+        <button ion-button class="logout" color="primary" (click)="logout()">Logout</button>
       </ion-list>
     </ion-content>
   </ion-menu>
@@ -24,7 +34,7 @@
       <button ion-button icon-only menuToggle>
           <ion-icon name="menu"></ion-icon>
       </button>
-      
+
       <button ion-button icon-only (click)='toggleSearch()'>
           <ion-icon name="search"></ion-icon>
       </button>

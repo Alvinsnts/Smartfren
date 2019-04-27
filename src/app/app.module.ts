@@ -25,6 +25,7 @@ import { RequestlistPage } from '../pages/requestlist/requestlist';
 import { SummaryPage } from '../pages/summary/summary';
 import { CheckstockPage } from '../pages/checkstock/checkstock';
 
+
 @NgModule({
   declarations: [
     MyApp,

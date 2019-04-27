@@ -104,27 +104,11 @@ export class HomePage {
     if(this.loginInfo.username == 'admin')
     {
       this.pages = [
-        { title: 'Home', component: HomePage },
-        { title: 'Add Product', component: AddproductPage },
-        { title: 'Add Location', component: AddnewlocationPage },
-        { title: 'Check Stock', component: CheckstockPage },
-        { title: 'Finance', component: FinancePage },
-        { title: 'Report', component: GraphPage },
-        { title: 'Request List', component: RequestlistPage },
-        { title: 'Summary', component: SummaryPage },
-        { title: 'Signup', component: SignupPage }
       ];
     }
     else
     {
       this.pages = [
-        { title: 'Home', component: HomePage },
-        { title: 'Update stock', component: UpdatestockPage },
-        { title: 'Check Stock', component: UpdatestockPage },
-        { title: 'Finance', component: FinancePage },
-        { title: 'Report', component: GraphPage },
-        { title: 'Request', component: RequestproductPage },
-        { title: 'Request List', component: RequestlistPage },
       ];
     }
   }
@@ -164,7 +148,7 @@ export class HomePage {
   }
   addInfoWindowToMarker(marker) {
     var infoWindowContent = 
-    '<div id="content"><h1 id="firstHeading" class="firstHeading">' + marker.title + '</h1><label id="secondHeading" class="secondHeading">' + "ID : " + marker.locationid + '</label><br /> <label id="secondHeading" class="secondHeading">' + "Phone Number : " + marker.contact + '</label><br /><label id="secondHeading" class="secondHeading">' + "Open Time : " + marker.opentime + '</label><br /><label id="secondHeading" class="secondHeading">' + "Address : " + marker.locationaddress + '</label><br /><button type="buttton" onclick="document.getElementById(\'addProduct\').click();">Add Product</button></div>';
+    '<div id="content"><h1 id="firstHeading" class="firstHeading">' + marker.title + '</h1><label id="secondHeading" class="secondHeading">' + "ID : " + marker.locationid + '</label><br /> <label id="secondHeading" class="secondHeading">' + "Phone Number : " + marker.contact + '</label><br /><label id="secondHeading" class="secondHeading">' + "Open Time : " + marker.opentime + '</label><br /><label id="secondHeading" class="secondHeading">' + "Address : " + marker.locationaddress + '</label><br /><button type="buttton" onclick="document.getElementById(\'updateStock\').click();">Update Stock</button></div>';
     var infoWindow = new google.maps.InfoWindow({
       content: infoWindowContent
     });
@@ -407,20 +391,12 @@ export class HomePage {
     this.storage.get('lastLocation').then((result) => {
       if (result) {
         let actionSheet = this.actionSheetCtrl.create({
-          title: 'Last Location: ' + result.location,
+          title: 'Check Location ',
           buttons: [
             {
               text: 'Reload',
               handler: () => {
                 this.getCurrentPosition();
-              }
-            },
-            {
-              text: 'Delete',
-              handler: () => {
-                this.storage.set('lastLocation', null);
-                this.showToast('Location deleted!');
-                this.initializeMap();
               }
             },
             {
